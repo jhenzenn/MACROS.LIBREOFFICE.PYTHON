@@ -4,6 +4,7 @@ import sys
 import logging
 import uno
 import Archivo
+import Hojas
 
 '''logging.basicConfig()
 log = logging.getLogger("Holapp")
@@ -22,6 +23,8 @@ if not oDoc:
     print("Fallo al abrir el archivo")'''
 
 oNuevoDocumento = Archivo.planillaNueva()
+Hojas.BorrarHoja(oNuevoDocumento,"Hoja1")
+
 quit()
 
 
