@@ -17,13 +17,11 @@ os.system(librebin + " " + libre_param)
 #os.system('/opt/openoffice4/program/soffice -accept=\"socket,host=localhost,port=2002\;urp\;\" &')
 #time.sleep(6)
 
-oDoc = Archivo.importCSV("file:///media/linux/csv/E01/1888.csv","_blank",True)
+'''oDoc = Archivo.importCSV("file:///media/linux/csv/E01/1888.csv","_blank",True)
 if not oDoc:
-    print("Fallo al abrir el archivo")
-else:
-    #time.sleep(10)
-    oDoc.dispose()
+    print("Fallo al abrir el archivo")'''
 
+oNuevoDocumento = Archivo.planillaNueva()
 quit()
 
 

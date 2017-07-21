@@ -15,7 +15,13 @@ def InicializarLODesktop(nIntentos):
             return oDesktop
             break
         except:
-            print("No puedo inicializar - Intento: " + i)
+            print("Esperando inicio de LibreOffice - Intento: " + str(i))
+
+def planillaNueva():
+    from com.sun.star.beans import PropertyValue
+    oDesktop = InicializarLODesktop(10)
+    oDataDoc = oDesktop.loadComponentFromURL("private:factory/scalc","_blank", 0, ())
+    return oDataDoc
 
 def importCSV(sCSVFileURL, sFrame, bVisible):
     from com.sun.star.beans import PropertyValue
