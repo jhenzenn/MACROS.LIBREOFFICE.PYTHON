@@ -1,6 +1,14 @@
 import os
 import uno
+import unohelper
 import time
+import Hojas
+
+def ArchivoExiste(sPath):
+    try:
+        return os.path.exists(sPath)
+    except:
+        return None
 
 def InicializarLODesktop(nIntentos):
     local = uno.getComponentContext()
@@ -49,12 +57,20 @@ def importCSV(sCSVFileURL, sFrame, bVisible):
     else:
         return oDataDoc
 
-'''def Main():
-    oDoc = importCSV("file:///media/linux/csv/E01/resumen1.csv","_blank",True)
-    if not oDoc:
-        print("Fallo al abrir el archivo")
-    else:
-        oDoc.dispose()
-        quit()
+def ConvertToURL(sPath):
+    try:
+        return unohelper.systemPathToFileUrl(sPath)
+    except:
+        return None
 
-Main()'''
+def ConvertFromURL(sURL):
+    try:
+        return unohelper.fileUrlToSystemPath(sURL)
+    except:
+        return None
+
+def PestanaDesdeCSV(sArchivo, sHojaDestino, oDocDestino):
+    oDoc = importCSV(ConvertToURL(sArchivo), "_blank", True)
+    oHojaActiva = oDoc.CurrentController.ActiveSheet
+    Hojas.CopiarHoja(oDoc, oHojaActiva, oDocDestino, sHojaDestino)
+    oDoc.close()
