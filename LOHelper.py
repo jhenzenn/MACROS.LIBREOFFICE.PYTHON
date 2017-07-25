@@ -15,10 +15,10 @@ class OfficeHelper:
         self.smgr = self.context.ServiceManager
         self.dispatcher = self.smgr.createInstance("com.sun.star.frame.DispatchHelper")
 
-    def convertToURL(sPath):
+    def convertToURL(self,sPath):
         return unohelper.systemPathToFileUrl(sPath)
 
-    def convertFromURL(sURL):
+    def convertFromURL(self,sURL):
         return unohelper.fileUrlToSystemPath(sURL)
 
     def copyCurrentSelection(self):
