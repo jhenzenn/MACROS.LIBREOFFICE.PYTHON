@@ -3,6 +3,14 @@ import uno
 import unohelper
 import time
 import Hojas
+import LOHelper
+
+def PestanaDesdeCSV(sArchivo, sHojaDestino, oDocDestino):
+    oHelper = LOHelper.OfficeHelper()
+    oDocCSV = oHelper.importCSV(oHelper.convertToURL(sArchivo))
+    oDocDestino.Sheets.importSheet(oDocCSV, oDocCSV.Sheets.getByIndex(0).Name, oDocDestino.Sheets.Count)
+    oDocDestino.Sheets.getByIndex(oDocDestino.Sheets.Count - 1).setName(sHojaDestino)
+    oDocCSV.close(0)
 
 def ArchivoExiste(sPath):
     try:
@@ -10,7 +18,7 @@ def ArchivoExiste(sPath):
     except:
         return None
 
-def InicializarLODesktop(nIntentos):
+'''def InicializarLODesktop(nIntentos):
     local = uno.getComponentContext()
     resolver = local.ServiceManager.createInstanceWithContext("com.sun.star.bridge.UnoUrlResolver", local)
 
@@ -68,9 +76,4 @@ def ConvertFromURL(sURL):
         return unohelper.fileUrlToSystemPath(sURL)
     except:
         return None
-
-def PestanaDesdeCSV(sArchivo, sHojaDestino, oDocDestino):
-    oDoc = importCSV(ConvertToURL(sArchivo), "_blank", True)
-    oHojaActiva = oDoc.CurrentController.ActiveSheet
-    Hojas.CopiarHoja(oDoc, oHojaActiva, oDocDestino, sHojaDestino)
-    oDoc.close()
+'''
