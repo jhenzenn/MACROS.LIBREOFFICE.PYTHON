@@ -22,10 +22,10 @@ class OfficeHelper:
         return unohelper.fileUrlToSystemPath(sURL)
 
     def copyCurrentSelection(self):
-        return self.dispatcher.executeDispatch(oHelper.getCurrentFrame(), ".uno:Copy","",0,())
+        return self.dispatcher.executeDispatch(self.getCurrentFrame(), ".uno:Copy","",0,())
 
     def pasteCurrentSelection(self):
-        return self.dispatcher.executeDispatch(oHelper.getCurrentFrame(), ".uno:Paste","",0,())
+        return self.dispatcher.executeDispatch(self.getCurrentFrame(), ".uno:Paste","",0,())
 
     def createNewScalc(self):
         return self.getDesktop().loadComponentFromURL("private:factory/scalc","_blank",0,())
@@ -73,6 +73,8 @@ class OfficeHelper:
         mri = self.createUnoService("mytools.Mri")
         mri.inspect(obj)
 
+def RGB(r, g, b):
+    return int('%02x%02x%02x' % (r, g, b), 16)
 
 '''def cleanParaStyle():
     ohelper = OfficeHelper()

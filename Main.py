@@ -2,6 +2,7 @@ import os
 import uno
 import Archivo
 import LOHelper
+import Tablas
 from com.sun.star.table import TableBorder
 from com.sun.star.table import BorderLine
 
@@ -36,8 +37,8 @@ for sRegion in mNombresRegiones:
     if not oEncontrado is None:
         oCursor = oHojaActiva.createCursorByRange(oEncontrado)
         oCursor.collapseToCurrentRegion()
-        print(mColoresRegiones[i], mColumnasRegiones[i], mFilasTotalizadas[i], mColumnasConNombre[i])
-'''
+        Tablas.FormatearRegion(oCursor,mColoresRegiones[i], mColumnasRegiones[i], mFilasTotalizadas[i], mColumnasConNombre[i])
+
 oTableBorder = TableBorder()
 oBorderLine = BorderLine()
 # Cuadrito de resumen
@@ -57,7 +58,7 @@ oSD = oHojaActiva.createSearchDescriptor()
 oSD.setSearchString("Resumen")
 oSD.SearchWords = True
 oSD.SearchCaseSensitive = True
-oSD.searchType = 1
+oSD.SearchType = 1
 oBuscarEn = oHojaActiva.getCellRangeByName("A1:Z254")
 oEncontrado = oBuscarEn.findFirst(oSD)
 oCursor = oHojaActiva.createCursorByRange(oEncontrado)
@@ -67,7 +68,10 @@ oCuadroResumen.getCellRangeByPosition(0,0,oCuadroResumen.Columns.Count-1,0).Cell
 oCuadroResumen.getCellRangeByPosition(0,0,oCuadroResumen.Columns.Count-1,0).CharFontName = "Arial"
 oCuadroResumen.getCellRangeByPosition(0,0,oCuadroResumen.Columns.Count-1,0).CharHeight = 11
 oCuadroResumen.getCellRangeByPosition(0,0,oCuadroResumen.Columns.Count-1,0).CharWeight = 150
-oCuadroResumen.getCellRangeByPosition(0,0,oCuadroResumen.Columns.Count-1,0).CharColor = RGB(255,255,255)
-oCuadroResumen.getCellRangeByPosition(0,oCuadroResumen.Rows.Count-3,oCuadroResumen.Columns.Count-1,oCuadroResumen.Rows.Count-3).CellBackColor = RGB(153,255,153)
-'''
+oCuadroResumen.getCellRangeByPosition(0,0,oCuadroResumen.Columns.Count-1,0).CharColor = LOHelper.RGB(255,255,255)
+oCuadroResumen.getCellRangeByPosition(0,oCuadroResumen.Rows.Count-3,oCuadroResumen.Columns.Count-1,oCuadroResumen.Rows.Count-3).CellBackColor = LOHelper.RGB(153,255,153)
+
+oHojaActiva.getCellRangeByName("F1").Columns.Width = 800
+oHojaActiva.getCellRangeByName("J1").Columns.Width = 800
+
 quit()
